@@ -1,5 +1,5 @@
 name: HomePod Connect
-version: 28.6-ls110
+version: 28.6-ls112
 slug: homepod-connect
 description: Play Spotify music on your HomePods through Spotify Connect
 arch:
