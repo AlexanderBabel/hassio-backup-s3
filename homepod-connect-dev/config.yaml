@@ -1,0 +1,25 @@
+name: HomePod Connect Dev
+version: 28.7-ls117
+slug: homepod-connect-dev
+description: This addon is used to test new versions of OwnTone
+arch:
+  - aarch64
+  - amd64
+map:
+  - config:rw
+  - media:rw
+host_network: true
+host_dbus: false
+host_ipc: false
+hassio_api: false
+auth_api: false
+hassio_role: "default"
+audio: false
+init: false
+startup: application
+boot: auto
+image: alexbabel/owntone
+webui: http://[HOST]:[PORT:3689]
+stage: experimental
+url: https://community.home-assistant.io/t/homepod-connect-spotify-on-homepods-with-spotify-connect/482227
+homeassistant: "0.110"
