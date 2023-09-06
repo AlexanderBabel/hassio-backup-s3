@@ -7,5 +7,4 @@ Currently maintained:
 - [HomePod Connect (OwnTone + librespot-java)](homepod-connect)
 
 Old addons:
-- librespot player
 - Nextcloud

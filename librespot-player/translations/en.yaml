@@ -1,7 +1,0 @@
-configuration:
-  pipe:
-    name: Librespot Pipe
-    description: Enter the path where the pipe should be created and is accessible to owntone
-  metadatapipe:
-    name: Librespot Metadata Pipe
-    description: Enter the path where the metadata pipe should be created and is accessible to owntone
