@@ -1,0 +1,33 @@
+configuration:
+  airplay_pipe:
+    name: Shairport Sync Airplay pipe
+    description: >-
+      Enable Shairport Sync Airplay as Owntone pipe input.
+  airplay_pipe_name:
+    name: Airplay pipe reciever name
+    description: >-
+      Airplay pipe reciever name visible to clients.
+  airplay_pipe_port:
+    name: Airplay pipe tcp/udp port
+    description: >-
+      Choose a differnt port number if running multiple Airplay instances on this server.
+  airplay_audio:
+    name: Shairport Sync Airplay audio
+    description: >-
+      Enable Shairport Sync Airplay as HAOS Audio input.
+  airplay_audio_name:
+    name: Airplay audio reciever name
+    description: >-
+      Airplay audio reciever name visible to clients.
+  airplay_audio_port:
+    name: Airplay audio tcp/udp port
+    description: >-
+      Choose a differnt port number if running multiple Airplay instances on this server.
+  librespot_java_cache:
+    name: Librespot-java song caching.
+    description: >-
+      The cache can take up a lot of space disk. Enable as needed.
+  shairport_sync_log_level:
+    name: Shairport Sync log level
+    description: >-
+      Minimal or more verbose logging.
