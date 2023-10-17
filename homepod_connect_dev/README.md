@@ -1,28 +1,51 @@
-# HomePod Connect
+# HomePod Connect Docker Image
 
-This add-on allows you to stream music directly to your HomePods from Spotify.
+This is the offical Docker image of the Home Assistant add-on [HomePod Connect](https://community.home-assistant.io/t/homepod-connect-spotify-on-homepods-with-spotify-connect/482227). You can also use it by itself on other systems. It works out of the box with zeroconf and can be discovered inside your local network.
 
-You can find more details on the [Home Assistant Community post](https://community.home-assistant.io/t/homepod-connect-spotify-on-homepods-with-spotify-connect/482227) and in the Documentation tab.
+## Difference to linuxserver/daapd
 
-## Features
-- OwnTone & librespot-java inside one Docker image
-- Ready out of the box with zeroconf & Home Assistant integration
-- Control OwnTone through Home Assistant
-- Metadata support (visible in Home Assistant)
-- Fully customizable through the config files in `/config/owntone`
+This repository contains a customized version of [linuxserver/daapd](https://github.com/linuxserver/docker-daapd). In this image librespot is replaced by [librespot-java](https://github.com/librespot-org/librespot-java) and openjdk11-jre is installed. Also a custom [OwnTone](https://github.com/owntone/owntone-server) and [librespot-java](https://github.com/librespot-org/librespot-java) configuration is provided.
 
-## Requirements
-- A Spotify Premium account
-- At least one HomePod
-- Correct set up in the Home app
-  - Home -> Home Settings -> Allow Speaker & TV Access -> Anyone On the same Network
-  - Home -> Home Settings -> Allow Speaker & TV Access -> Require Password: Disabled
-- VSCode addon or any other text editor to edit the configuration
+In addition, [Shairport Sync](https://github.com/mikebrady/shairport-sync)
+is installed and can be optionally enabled on the configuration page to provide either or both these Airplay instances:
 
-## Comfort features
-Additionally to this addon, I recommend to use the Home Assistant OwnTone integration. With that, you can control which HomePod should play music.
+1. An Airplay instance that will pipe audio and metadata to Owntone for whole house audio from any source that can play to an Airplay 1 device. This Airplay instance is hidden from OwnTone so it does not pipe back to OwnTone.
 
-[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=forked_daapd)
+2. An Airplay instance that will play to the audio device of the Home Assistant host.
 
-<!-- Second, there is a blueprint that allows you to automatically play music in a room as soon as someone enters it.
-You can find it in the Home Assistant Community. -->
+The changes can be viewed inside the `Dockerfile`. 
+
+This image is built automatically when a new linuxserver/daapd or Shairport Sync version is released.
+
+## Usage
+
+You can pull the image by using
+```bash
+docker pull alexbabel/owntone:VERSION
+```
+or use GHCR:
+```bash
+docker pull ghcr.io/alexanderbabel/owntone:VERSION
+```
+
+Run the image:
+```bash
+docker run --network=host -v $(pwd)/config:/config/owntone alexbabel/owntone:VERSION
+```
+
+## Access
+You can access the OwnTone instance on the default port (3689).
+
+## Configuration
+All configuration files are stored inside the docker image in `/config/owntone`. There, you can find multple files:
+
+- [`librespot-java.toml`](https://github.com/AlexanderBabel/owntone/blob/main/root/defaults/librespot-java.toml) - Configuration for [librespot-java](https://github.com/librespot-org/librespot-java)
+- [`owntone.conf`](https://github.com/AlexanderBabel/owntone/blob/main/root/defaults/owntone.conf) - Configuration for [OwnTone](https://github.com/owntone/owntone-server)
+- [`shairport-sync-pipe.conf`](https://github.com/AlexanderBabel/owntone/blob/main/root/defaults/shairport-sync-pipe.conf) - Configuration for [Shairport Sync](https://github.com/mikebrady/shairport-sync)
+- [`shairport-sync-audio.conf`](https://github.com/AlexanderBabel/owntone/blob/main/root/defaults/shairport-sync-audio.conf) - Configuration for [Shairport Sync](https://github.com/mikebrady/shairport-sync)
+
+All files are adjusted to work out of the box as a Spotify Connect speaker. The content of these files can be found in this repository.
+
+The configuration page allows you to enable/disable the Airplay instances, name them them, change the tcp/udp port if needed, and choose from two logging levels.
+
+Also on the configuration page, the [librespot-java](https://github.com/librespot-org/librespot-java) cache can be enabled/disabled and the Home Assistant audio device can be chosen.
