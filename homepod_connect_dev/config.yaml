@@ -1,9 +1,8 @@
-name: HomePod Connect Dev
-version: 28.8-ls118
-slug: homepod_connect_dev
-description: This addon is used to test new versions of OwnTone
+name: HomePod Connect iV
+version: iV1_2.3.6
+slug: homepod_connectiv
+description: Play Spotify music on your HomePods through Spotify Connect iV
 arch:
-  - aarch64
   - amd64
 map:
   - config:rw
@@ -14,12 +13,29 @@ host_ipc: false
 hassio_api: false
 auth_api: false
 hassio_role: "default"
-audio: false
+audio: true
 init: false
 startup: application
 boot: auto
-image: alexbabel/owntone
 webui: http://[HOST]:[PORT:3689]
 stage: experimental
 url: https://community.home-assistant.io/t/homepod-connect-spotify-on-homepods-with-spotify-connect/482227
+options:
+  airplay_pipe: false
+  airplay_pipe_name: "HomePod Connect"
+  airplay_pipe_port: "5000"
+  airplay_audio: false
+  airplay_audio_name: "HAOS Audio"
+  airplay_audio_port: "5003"
+  shairport_sync_log_level: "v"
+  librespot_java_cache: false
+schema:
+  airplay_pipe: bool
+  airplay_pipe_name: str
+  airplay_pipe_port: list(5000|5001|5002)
+  airplay_audio: bool
+  airplay_audio_name: str
+  airplay_audio_port: list(5003|5004|5005)
+  shairport_sync_log_level: list(v|vv)
+  librespot_java_cache: bool
 homeassistant: "0.110"
