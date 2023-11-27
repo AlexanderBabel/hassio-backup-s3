@@ -9,7 +9,7 @@ map:
   - config:rw
   - media:rw
 host_network: true
-host_dbus: false
+host_dbus: true
 host_ipc: false
 hassio_api: false
 auth_api: false
